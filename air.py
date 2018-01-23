@@ -1,10 +1,10 @@
 from flask import Flask
 from flask import request
-from pymongo import MongoClient
+# from pymongo import MongoClient
 app = Flask(__name__)
 
-client = MongoClient('localhost:27017')
-db=client.air_data
+# client = MongoClient('localhost:27017')
+# db=client.air_data
 
 print("done establishing connection!")
 
@@ -14,12 +14,16 @@ def sensor():
         # print (request.is_json)
         content = request.json
         print(content)
-        db.air_datas.insert_one(content)
-        fivestar = db.sensor_datas.find()
-        print(fivestar)
+#         db.air_datas.insert_one(content)
+#         fivestar = db.sensor_datas.find()
+#         print(fivestar)
         return "done"
    else:
         return "error"
+@app.route('/',methods = ['GET'])
+def index():
+   return "done"
+  
 @app.route('/val/<co>/<dust>',methods = ['GET'])
 def val(co=None,dust=None):
 	print(co+" "+dust)	
